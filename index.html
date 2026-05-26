@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yuri Literature Shelf — Girls' Love Reading List</title>
+  <meta name="description" content="A personal reading list and review shelf for Girls' Love (Yuri) manga and literature. Browse by reading status, publication status, genre, and rating.">
+  <meta property="og:title" content="Yuri Literature Shelf">
+  <meta property="og:description" content="A curated Girls' Love manga shelf with personal ratings, reviews, and genre tags.">
+  <meta name="theme-color" content="#E05275">
+  <link rel="stylesheet" href="style.css">
+  <!-- Lucide Icons CDN (pinned for stability) -->
+  <script src="https://unpkg.com/lucide@0.475.0/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+
+  <div class="app">
+    <header>
+      <div class="header-top">
+        <div class="header-title-area">
+          <h1>Yuri Shelf</h1>
+          <span class="subtitle">a collection of girls' love literature</span>
+        </div>
+        <div class="header-actions">
+          <button class="btn-round" id="theme-toggle" type="button" aria-label="Toggle light or dark theme" title="Toggle Light/Dark Theme">
+            <i data-lucide="moon" id="theme-icon"></i>
+          </button>
+        </div>
+      </div>
+      
+      <div class="filters">
+        <div class="search-wrapper">
+          <i data-lucide="search" class="search-icon" aria-hidden="true"></i>
+          <input type="text" id="search-input" placeholder="Search titles..." aria-label="Search manga titles" autocomplete="off">
+        </div>
+        
+        <div class="filter-group">
+          <label class="filter-label" for="filter-status">Reading</label>
+          <select id="filter-status">
+            <option value="all">All Reading Status</option>
+            <option value="reading">Currently Reading</option>
+            <option value="finished">Finished</option>
+            <option value="paused">On Hold</option>
+            <option value="dropped">Dropped</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label" for="filter-pub-status">Publication</label>
+          <select id="filter-pub-status">
+            <option value="all">All Pub Status</option>
+            <option value="completed">Completed</option>
+            <option value="ongoing">Ongoing</option>
+            <option value="scanlation ongoing">Scanlation Ongoing</option>
+            <option value="axed">Axed</option>
+            <option value="finished">Finished (Japan)</option>
+            <option value="licensed">Licensed</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label" for="filter-tag">Genre/Tag</label>
+          <select id="filter-tag">
+            <option value="all">All Genres</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label" for="filter-rating">Min Rating</label>
+          <select id="filter-rating">
+            <option value="all">Any Rating</option>
+            <option value="5">5 Stars Only</option>
+            <option value="4">4+ Stars</option>
+            <option value="3">3+ Stars</option>
+          </select>
+        </div>
+
+        <button class="btn btn-secondary btn-reset" type="button" data-action="reset-filters" title="Reset All Filters">
+          <i data-lucide="rotate-ccw"></i> Reset
+        </button>
+      </div>
+    </header>
+
+    <div class="main">
+      <div class="grid-area">
+        <div class="count-bar">
+          <p class="count" id="manga-count" aria-live="polite">Loading shelf...</p>
+          <div class="stats-summary" id="stats-summary" aria-label="Visible shelf statistics">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+        
+        <div class="grid is-loading" id="manga-grid" aria-busy="true">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Detail Pop-out Window -->
+  <div class="detail-modal-overlay" id="detail-modal">
+    <div class="detail-panel detail-popout hidden" id="detail-panel" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="detail-title">
+      <!-- Rendered dynamically -->
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container" role="status" aria-live="polite" aria-atomic="false"></div>
+
+  <script>
+    // Classic embedded sample list used as fallback when fetch() is blocked by CORS/Offline (direct file:// launch)
+    const OFFLINE_FALLBACK = [
+      { "id": 1, "title": "Bloom Into You", "cover": "", "rating": 5, "status": "finished", "pubStatus": "completed", "review": "A masterclass in character development, pacing, and psychological depth. Yuu and Touko's exploration of what love means is beautiful, subtle, and incredibly moving. Nakatani Nio's artwork is clean and expressive. Highly recommended!", "tags": ["Romance", "Drama", "School Life", "High School"] },
+      { "id": 2, "title": "Whisper Me a Love Song", "cover": "", "rating": 5, "status": "reading", "pubStatus": "ongoing", "review": "Extremely sweet and cozy. Himari and Yori's romance is adorable and features a wonderful music theme. The art is absolutely gorgeous with high contrast paneling and expressive facial details.", "tags": ["Romance", "Music", "School Life", "Fluff"] },
+      { "id": 3, "title": "The Summer You Were There", "cover": "", "rating": 5, "status": "finished", "pubStatus": "finished", "review": "An absolutely heart-wrenching, bittersweet masterpiece. The relationship between Shizuku and Kaori is built on layers of tragedy, writing, and beautiful quiet moments. Keep tissues nearby.", "tags": ["Drama", "Tragedy", "Romance", "Emotional"] },
+      { "id": 4, "title": "How Do We Relationship?", "cover": "", "rating": 5, "status": "reading", "pubStatus": "ongoing", "review": "One of the most mature and realistic depictions of a queer relationship in manga history. Miwa and Saeko face actual relationship conflicts, communication barriers, and college social pressures. Deeply relatable.", "tags": ["Drama", "Romance", "College Life", "Realistic"] },
+      { "id": 5, "title": "I'm in Love with the Villainess", "cover": "", "rating": 4, "status": "reading", "pubStatus": "ongoing", "review": "A delightful isekai rom-com that has surprising political and social depth. Rei's devotion to Claire is both funny and deeply sincere. The world building builds up elegantly over time.", "tags": ["Isekai", "Fantasy", "Comedy", "Romance"] },
+      { "id": 6, "title": "Girl Friends", "cover": "", "rating": 5, "status": "finished", "pubStatus": "completed", "review": "A foundational modern yuri classic. Morinaga Milk's story of Mari and Akiko remains the gold standard for high school romance and self-acceptance. The slow-burn progression is perfect.", "tags": ["Romance", "School Life", "Drama", "Classic"] },
+      { "id": 7, "title": "Citrus", "cover": "", "rating": 3, "status": "dropped", "pubStatus": "finished", "review": "Highly dramatic stepsibling romance with stunning artwork, but the early pacing and boundary issues can be quite polarizing. Great fashion and side characters though.", "tags": ["Drama", "Romance", "School Life", "Melodrama"] },
+      { "id": 8, "title": "Otherside Picnic", "cover": "", "rating": 5, "status": "reading", "pubStatus": "ongoing", "review": "A unique blend of cosmic horror, Japanese internet urban legends, and slow-burn GL romance. Sorawo and Toriko's chemistry in dangerous anomalies is unmatched. Highly atmospheric.", "tags": ["Sci-Fi", "Mystery", "Adventure", "Horror", "Slow Burn"] },
+      { "id": 9, "title": "Adachi and Shimamura", "cover": "", "rating": 4, "status": "paused", "pubStatus": "ongoing", "review": "A quiet, highly introspective slice-of-life that focuses on the distance between two teenage girls. Adachi's intense inner monologues are highly relatable and endearing.", "tags": ["Slice of Life", "Romance", "School Life", "Slow Burn"] }
+    ];
+
+    const COVER_THEME_COUNT = 10;
+
+    let mangaList = [];
+    let filteredList = [];
+    let selectedId = null;
+    let currentSearch = '';
+    const elements = {};
+
+    // Initialize application
+    window.addEventListener('DOMContentLoaded', async () => {
+      cacheElements();
+      bindEvents();
+      renderLoadingSkeleton();
+      initTheme();
+      await loadMangaData();
+    });
+
+    function cacheElements() {
+      elements.grid = document.getElementById('manga-grid');
+      elements.countLabel = document.getElementById('manga-count');
+      elements.statsSummary = document.getElementById('stats-summary');
+      elements.detailModal = document.getElementById('detail-modal');
+      elements.detailPanel = document.getElementById('detail-panel');
+      elements.toastContainer = document.getElementById('toast-container');
+      elements.themeToggle = document.getElementById('theme-toggle');
+      elements.searchInput = document.getElementById('search-input');
+      elements.statusFilter = document.getElementById('filter-status');
+      elements.pubStatusFilter = document.getElementById('filter-pub-status');
+      elements.tagFilter = document.getElementById('filter-tag');
+      elements.ratingFilter = document.getElementById('filter-rating');
+    }
+
+    function bindEvents() {
+      elements.themeToggle.addEventListener('click', toggleTheme);
+      elements.searchInput.addEventListener('input', event => handleSearch(event.target.value));
+      [elements.statusFilter, elements.pubStatusFilter, elements.tagFilter, elements.ratingFilter]
+        .forEach(select => select.addEventListener('change', applyFilters));
+      elements.grid.addEventListener('click', handleGridClick);
+      elements.grid.addEventListener('keydown', handleGridKeydown);
+      elements.detailPanel.addEventListener('click', handleDetailClick);
+      elements.detailModal.addEventListener('click', handleDetailModalClick);
+      document.addEventListener('keydown', handleDocumentKeydown);
+      document.addEventListener('click', handleDocumentClick);
+      document.addEventListener('error', handleImageError, true);
+    }
+
+    function renderIcons() {
+      if (window.lucide && typeof window.lucide.createIcons === 'function') {
+        window.lucide.createIcons();
+      }
+    }
+
+    function renderLoadingSkeleton() {
+      elements.grid.setAttribute('aria-busy', 'true');
+      elements.grid.classList.add('is-loading');
+      elements.countLabel.textContent = 'Loading shelf...';
+      elements.statsSummary.innerHTML = `
+        <span class="skeleton-line skeleton-stat"></span>
+        <span class="skeleton-line skeleton-stat"></span>
+        <span class="skeleton-line skeleton-stat"></span>
+      `;
+      elements.grid.innerHTML = Array.from({ length: 8 }, (_, index) => `
+        <article class="card skeleton-card cover-theme-${index % COVER_THEME_COUNT}" aria-hidden="true">
+          <div class="cover-wrapper skeleton-cover"></div>
+          <div class="card-body">
+            <span class="skeleton-line skeleton-title"></span>
+            <span class="skeleton-line skeleton-meta"></span>
+            <span class="skeleton-line skeleton-chip"></span>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    // Theme Management
+    function initTheme() {
+      const savedTheme = localStorage.getItem('yuri-theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateThemeIcon(savedTheme);
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme');
+      const nextTheme = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', nextTheme);
+      localStorage.setItem('yuri-theme', nextTheme);
+      updateThemeIcon(nextTheme);
+      showToast(`Switched to ${nextTheme} theme`, 'success', nextTheme === 'dark' ? 'moon' : 'sun');
+    }
+
+    function updateThemeIcon(theme) {
+      const icon = document.getElementById('theme-icon');
+      if (theme === 'dark') {
+        icon.setAttribute('data-lucide', 'sun');
+      } else {
+        icon.setAttribute('data-lucide', 'moon');
+      }
+      document.getElementById('theme-toggle')?.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+      renderIcons();
+    }
+
+    // Load shelf data
+    async function loadMangaData() {
+      try {
+        const response = await fetch('manga-data.json');
+        if (!response.ok) throw new Error('Failed to load local JSON file.');
+        mangaList = await response.json();
+        showToast('Shelf loaded successfully!', 'success', 'check-circle');
+      } catch (err) {
+        console.warn('CORS or file access restriction caught. Utilizing offline embedded backup.', err);
+        mangaList = OFFLINE_FALLBACK;
+        showToast('Loading local backup shelf list.', 'info', 'info');
+      }
+      populateTagDropdown();
+      applyFilters();
+    }
+
+    // Populate dynamic tags in filter select
+    function populateTagDropdown() {
+      const tagsSet = new Set();
+      mangaList.forEach(item => {
+        if (item.tags && Array.isArray(item.tags)) {
+          item.tags.forEach(tag => tagsSet.add(tag.trim()));
+        }
+      });
+
+      const sortedTags = Array.from(tagsSet).sort();
+      // Preserve first option ("All Genres")
+      elements.tagFilter.innerHTML = '<option value="all">All Genres</option>';
+      sortedTags.forEach(tag => {
+        const opt = document.createElement('option');
+        opt.value = tag;
+        opt.textContent = tag;
+        elements.tagFilter.appendChild(opt);
+      });
+    }
+
+    // Filters & Search handling
+    function handleSearch(val) {
+      currentSearch = val.trim().toLowerCase();
+      applyFilters();
+    }
+
+    function resetFilters() {
+      elements.searchInput.value = '';
+      elements.statusFilter.value = 'all';
+      elements.pubStatusFilter.value = 'all';
+      elements.tagFilter.value = 'all';
+      elements.ratingFilter.value = 'all';
+      currentSearch = '';
+      applyFilters();
+      showToast('Filters cleared', 'success', 'rotate-ccw');
+    }
+
+    function applyFilters() {
+      const statusFilter = elements.statusFilter.value;
+      const pubStatusFilter = elements.pubStatusFilter.value;
+      const tagFilter = elements.tagFilter.value;
+      const ratingFilter = elements.ratingFilter.value;
+
+      filteredList = mangaList.filter(item => {
+        // Search filter
+        if (currentSearch && !item.title.toLowerCase().includes(currentSearch)) {
+          return false;
+        }
+        // Reading Status filter
+        if (statusFilter !== 'all' && item.status !== statusFilter) {
+          return false;
+        }
+        // Publication Status filter
+        if (pubStatusFilter !== 'all' && item.pubStatus !== pubStatusFilter) {
+          return false;
+        }
+        // Genre/Tag filter
+        if (tagFilter !== 'all') {
+          const tags = Array.isArray(item.tags) ? item.tags : [];
+          const matchTag = tags.some(t => t.trim().toLowerCase() === tagFilter.toLowerCase());
+          if (!matchTag) return false;
+        }
+        // Rating filter
+        if (ratingFilter !== 'all') {
+          const minRate = parseInt(ratingFilter, 10);
+          if (item.rating < minRate) return false;
+        }
+        return true;
+      });
+
+      syncSelectionWithFilters();
+      elements.grid.classList.remove('is-loading');
+      elements.grid.setAttribute('aria-busy', 'false');
+      renderGrid();
+      renderStats();
+    }
+
+    function syncSelectionWithFilters() {
+      if (selectedId !== null && !filteredList.some(item => item.id === selectedId)) {
+        // Reset state directly — renderGrid() is called immediately after, so no need to query cards
+        closeDetails();
+      }
+    }
+
+    // Grid rendering
+    function renderGrid() {
+      elements.countLabel.textContent = `${filteredList.length} ${filteredList.length === 1 ? 'title' : 'titles'}`;
+
+      if (filteredList.length === 0) {
+        elements.grid.innerHTML = `
+          <div class="grid-empty">
+            <div class="empty">
+              <i data-lucide="flower-2"></i>
+              <div class="empty-title">No Literature Found</div>
+              <div class="empty-desc">Try resetting your filters or adjusting your search term to explore other girls' love records.</div>
+              <button class="btn btn-secondary" type="button" data-action="reset-filters">Reset Filters</button>
+            </div>
+          </div>
+        `;
+        renderIcons();
+        return;
+      }
+
+      elements.grid.innerHTML = filteredList.map(item => {
+        const coverHtml = getCoverHtml(item);
+        const starsHtml = getStarsHtml(item.rating);
+        const isActive = selectedId === item.id ? 'active' : '';
+        const readingBadge = getReadingBadge(item.status);
+        const pubBadge = getPubBadge(item.pubStatus);
+
+        return `
+          <article class="card ${isActive}" role="button" tabindex="0" data-id="${item.id}" aria-pressed="${selectedId === item.id}" aria-label="Open details for ${escapeHtml(item.title)}">
+            <div class="cover-wrapper">
+              ${coverHtml}
+            </div>
+            <div class="card-body">
+              <div class="card-title" title="${escapeHtml(item.title)}">${escapeHtml(item.title)}</div>
+              <div class="card-meta">
+                <div class="stars" aria-label="${item.rating} out of 5 stars">${starsHtml}</div>
+                <div class="card-meta-row">
+                  ${readingBadge}
+                  ${pubBadge}
+                </div>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+      renderIcons();
+    }
+
+    function renderStats() {
+      const statsSource = filteredList;
+      const finishedCount = statsSource.filter(m => m.status === 'finished').length;
+      const readingCount = statsSource.filter(m => m.status === 'reading').length;
+      const avgRating = (statsSource.reduce((acc, m) => acc + m.rating, 0) / (statsSource.length || 1)).toFixed(1);
+
+      elements.statsSummary.innerHTML = `
+        <span>Finished: <strong>${finishedCount}</strong></span>
+        <span>Reading: <strong>${readingCount}</strong></span>
+        <span>Average Rating: <strong>${avgRating} <i data-lucide="star" class="star-icon stat-star is-filled" aria-hidden="true"></i></strong></span>
+      `;
+      renderIcons();
+    }
+
+    // Cover Render Helper
+    function getCoverHtml(item) {
+      const themeClass = getCoverThemeClass(item);
+      if (item.cover && item.cover.trim() !== '') {
+        return `
+          <img class="cover-img" src="${escapeHtml(item.cover)}" alt="${escapeHtml(item.title)}" 
+               data-cover-image>
+          <div class="cover-placeholder is-fallback ${themeClass}">
+            <i data-lucide="heart"></i>
+            <span class="cover-placeholder-title">${escapeHtml(item.title)}</span>
+          </div>
+        `;
+      } else {
+        return `
+          <div class="cover-placeholder ${themeClass}">
+            <i data-lucide="heart"></i>
+            <span class="cover-placeholder-title">${escapeHtml(item.title)}</span>
+          </div>
+        `;
+      }
+    }
+
+    function getCoverThemeClass(item) {
+      const id = Math.abs(Number(item.id) || 0);
+      return `cover-theme-${id % COVER_THEME_COUNT}`;
+    }
+
+    // Stars String Helper
+    function getStarsHtml(rating) {
+      let stars = '';
+      for (let i = 1; i <= 5; i++) {
+        if (i <= rating) {
+          stars += '<i data-lucide="star" class="star-icon is-filled" aria-hidden="true"></i>';
+        } else {
+          stars += '<i data-lucide="star" class="star-icon is-empty" aria-hidden="true"></i>';
+        }
+      }
+      return stars;
+    }
+
+    // Badges Helpers
+    function getReadingBadge(status) {
+      const map = {
+        reading: ['Reading', 'status-reading'],
+        finished: ['Finished', 'status-finished'],
+        dropped: ['Dropped', 'status-dropped'],
+        paused: ['On Hold', 'status-paused']
+      };
+      const [label, cls] = map[status] || [status, ''];
+      return `<span class="badge ${cls}">${label}</span>`;
+    }
+
+    function getPubBadge(pubStatus) {
+      const map = {
+        completed: ['Completed', 'pub-completed'],
+        ongoing: ['Ongoing', 'pub-ongoing'],
+        'scanlation ongoing': ['Scanlation', 'pub-scanlation'],
+        axed: ['Axed', 'pub-axed'],
+        finished: ['Finished (JP)', 'pub-finished'],
+        licensed: ['Licensed', 'pub-licensed']
+      };
+      const [label, cls] = map[pubStatus] || [pubStatus, ''];
+      return `<span class="badge ${cls}">${label}</span>`;
+    }
+
+    // Pop-out Selection
+    function selectManga(id) {
+      const cards = document.querySelectorAll('.card');
+
+      if (selectedId === id) {
+        closeDetails();
+        return;
+      }
+
+      const item = mangaList.find(m => m.id === id);
+      if (!item) return;
+
+      selectedId = id;
+      cards.forEach(c => {
+        c.classList.remove('active');
+        c.setAttribute('aria-pressed', 'false');
+        if (Number(c.dataset.id) === id) {
+          c.classList.add('active');
+          c.setAttribute('aria-pressed', 'true');
+        }
+      });
+
+      renderDetails(item);
+      elements.detailModal.classList.add('open');
+      elements.detailPanel.classList.remove('hidden');
+      elements.detailPanel.setAttribute('aria-hidden', 'false');
+    }
+
+    function handleGridClick(event) {
+      const card = event.target.closest('.card[data-id]');
+      if (!card) return;
+      selectManga(Number(card.dataset.id));
+    }
+
+    function handleGridKeydown(event) {
+      const card = event.target.closest('.card[data-id]');
+      if (!card) return;
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        selectManga(Number(card.dataset.id));
+      }
+    }
+
+    function handleDetailClick(event) {
+      const actionTarget = event.target.closest('[data-action="close-details"]');
+      if (actionTarget) {
+        closeDetails();
+        return;
+      }
+
+      const tagButton = event.target.closest('.tag-btn[data-tag]');
+      if (tagButton) {
+        filterByTag(tagButton.dataset.tag);
+      }
+    }
+
+    function handleDetailModalClick(event) {
+      if (event.target === event.currentTarget) {
+        closeDetails();
+      }
+    }
+
+    function handleDocumentClick(event) {
+      if (event.target.closest('[data-action="reset-filters"]')) {
+        resetFilters();
+      }
+    }
+
+    function handleDocumentKeydown(event) {
+      if (event.key === 'Escape' && elements.detailModal.classList.contains('open')) {
+        closeDetails();
+      }
+    }
+
+    function handleImageError(event) {
+      const image = event.target;
+      if (!(image instanceof HTMLImageElement) || !image.matches('[data-cover-image]')) return;
+      image.classList.add('is-hidden');
+      // Use closest() to find the wrapper, then query the fallback — resilient to template refactors
+      const wrapper = image.closest('.cover-wrapper, .detail-cover-wrap');
+      wrapper?.querySelector('.is-fallback')?.classList.add('is-visible');
+    }
+
+    function closeDetails() {
+      selectedId = null;
+      elements.detailModal.classList.remove('open');
+      elements.detailPanel.classList.add('hidden');
+      elements.detailPanel.setAttribute('aria-hidden', 'true');
+      document.querySelectorAll('.card').forEach(c => {
+        c.classList.remove('active');
+        c.setAttribute('aria-pressed', 'false');
+      });
+    }
+
+    function renderDetails(item) {
+      const panel = elements.detailPanel;
+      const themeClass = getCoverThemeClass(item);
+      
+      let coverDetailHtml = '';
+      if (item.cover && item.cover.trim() !== '') {
+        coverDetailHtml = `
+          <img class="detail-cover-img" src="${escapeHtml(item.cover)}" alt="${escapeHtml(item.title)}"
+               data-cover-image>
+          <div class="detail-cover-placeholder is-fallback ${themeClass}">
+            <i data-lucide="flower-2"></i>
+            <span class="detail-cover-title">${escapeHtml(item.title)}</span>
+          </div>
+        `;
+      } else {
+        coverDetailHtml = `
+          <div class="detail-cover-placeholder ${themeClass}">
+            <i data-lucide="flower-2"></i>
+            <span class="detail-cover-title">${escapeHtml(item.title)}</span>
+          </div>
+        `;
+      }
+
+      const ratingStars = getStarsHtml(item.rating);
+
+      panel.innerHTML = `
+        <div class="detail-cover-wrap">
+          ${coverDetailHtml}
+          <button class="detail-close-btn" type="button" data-action="close-details" aria-label="Close details" title="Close details">
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+        <div class="detail-body">
+          <div class="detail-header">
+            <h2 class="detail-title" id="detail-title">${escapeHtml(item.title)}</h2>
+            <div class="detail-badges">
+              ${getReadingBadge(item.status)}
+              ${getPubBadge(item.pubStatus)}
+            </div>
+          </div>
+
+          <div class="detail-meta-list">
+            <div class="detail-meta-item">
+              <span class="label"><i data-lucide="star"></i> Rating</span>
+              <span class="value detail-rating-value">
+                ${item.rating}/5 ${ratingStars}
+              </span>
+            </div>
+            <div class="detail-meta-item">
+              <span class="label"><i data-lucide="book-open"></i> Reading State</span>
+              <span class="value">${escapeHtml(getStatusLabel(item.status))}</span>
+            </div>
+            <div class="detail-meta-item">
+              <span class="label"><i data-lucide="globe"></i> Publication</span>
+              <span class="value text-capitalize">${escapeHtml(item.pubStatus)}</span>
+            </div>
+          </div>
+
+          <div class="detail-section">
+            <span class="detail-section-title">Genres & Tags</span>
+            <div class="detail-tags">
+              ${(Array.isArray(item.tags) ? item.tags : []).map(t => `<button class="tag-btn" type="button" data-tag="${escapeHtml(t.trim())}">${escapeHtml(t.trim())}</button>`).join('')}
+            </div>
+          </div>
+
+          ${item.review ? `
+            <div class="detail-section detail-review-section">
+              <span class="detail-section-title">Personal Thoughts</span>
+              <p class="detail-review">"${escapeHtml(item.review)}"</p>
+            </div>
+          ` : ''}
+        </div>
+      `;
+      renderIcons();
+    }
+
+    // Filter list when tag inside detail pop-out is clicked
+    function filterByTag(tag) {
+      elements.tagFilter.value = tag;
+      applyFilters();
+      showToast(`Filtered by tag: ${tag}`, 'success', 'tag');
+    }
+
+    // Success / Status Toasts
+    function showToast(message, type = 'success', icon = 'check-circle') {
+      const toast = document.createElement('div');
+      toast.className = `toast toast-${type}`;
+      toast.innerHTML = `<i data-lucide="${icon}" aria-hidden="true"></i><span>${escapeHtml(message)}</span>`;
+      
+      elements.toastContainer.appendChild(toast);
+      
+      // Trigger smooth slide in
+      setTimeout(() => {
+        toast.classList.add('show');
+      }, 50);
+
+      // Auto dismiss
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => {
+          toast.remove();
+        }, 300);
+      }, 4000);
+      
+      renderIcons();
+    }
+
+    // Human-readable reading status label
+    function getStatusLabel(status) {
+      const map = { reading: 'Reading', finished: 'Finished', dropped: 'Dropped', paused: 'On Hold' };
+      return map[status] || status;
+    }
+
+    // Escape HTML to prevent injection
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+  </script>
+</body>
+</html>

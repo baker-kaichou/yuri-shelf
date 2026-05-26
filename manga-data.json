@@ -1,0 +1,152 @@
+[
+  {
+    "id": 1,
+    "title": "Bloom Into You",
+    "cover": "",
+    "rating": 5,
+    "status": "finished",
+    "pubStatus": "completed",
+    "review": "A masterclass in character development, pacing, and psychological depth. Yuu and Touko's exploration of what love means is beautiful, subtle, and incredibly moving. Nakatani Nio's artwork is clean and expressive. Highly recommended!",
+    "tags": [
+      "Romance",
+      "Drama",
+      "School Life",
+      "High School"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Whisper Me a Love Song",
+    "cover": "",
+    "rating": 5,
+    "status": "reading",
+    "pubStatus": "ongoing",
+    "review": "Extremely sweet and cozy. Himari and Yori's romance is adorable and features a wonderful music theme. The art is absolutely gorgeous with high contrast paneling and expressive facial details.",
+    "tags": [
+      "Romance",
+      "Music",
+      "School Life",
+      "Fluff"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "The Summer You Were There",
+    "cover": "",
+    "rating": 5,
+    "status": "finished",
+    "pubStatus": "finished",
+    "review": "An absolutely heart-wrenching, bittersweet masterpiece. The relationship between Shizuku and Kaori is built on layers of tragedy, writing, and beautiful quiet moments. Keep tissues nearby.",
+    "tags": [
+      "Drama",
+      "Tragedy",
+      "Romance",
+      "Emotional"
+    ]
+  },
+  {
+    "id": 4,
+    "title": "How Do We Relationship?",
+    "cover": "",
+    "rating": 5,
+    "status": "reading",
+    "pubStatus": "ongoing",
+    "review": "One of the most mature and realistic depictions of a queer relationship in manga history. Miwa and Saeko face actual relationship conflicts, communication barriers, and college social pressures. Deeply relatable.",
+    "tags": [
+      "Drama",
+      "Romance",
+      "College Life",
+      "Realistic"
+    ]
+  },
+  {
+    "id": 5,
+    "title": "I'm in Love with the Villainess",
+    "cover": "",
+    "rating": 4,
+    "status": "reading",
+    "pubStatus": "ongoing",
+    "review": "A delightful isekai rom-com that has surprising political and social depth. Rei's devotion to Claire is both funny and deeply sincere. The world building builds up elegantly over time.",
+    "tags": [
+      "Isekai",
+      "Fantasy",
+      "Comedy",
+      "Romance"
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Girl Friends",
+    "cover": "",
+    "rating": 5,
+    "status": "finished",
+    "pubStatus": "completed",
+    "review": "A foundational modern yuri classic. Morinaga Milk's story of Mari and Akiko remains the gold standard for high school romance and self-acceptance. The slow-burn progression is perfect.",
+    "tags": [
+      "Romance",
+      "School Life",
+      "Drama",
+      "Classic"
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Citrus",
+    "cover": "",
+    "rating": 3,
+    "status": "dropped",
+    "pubStatus": "finished",
+    "review": "Highly dramatic stepsibling romance with stunning artwork, but the early pacing and boundary issues can be quite polarizing. Great fashion and side characters though.",
+    "tags": [
+      "Drama",
+      "Romance",
+      "School Life",
+      "Melodrama"
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Otherside Picnic",
+    "cover": "",
+    "rating": 5,
+    "status": "reading",
+    "pubStatus": "ongoing",
+    "review": "A unique blend of cosmic horror, Japanese internet urban legends, and slow-burn GL romance. Sorawo and Toriko's chemistry in dangerous anomalies is unmatched. Highly atmospheric.",
+    "tags": [
+      "Sci-Fi",
+      "Mystery",
+      "Adventure",
+      "Horror",
+      "Slow Burn"
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Adachi and Shimamura",
+    "cover": "",
+    "rating": 4,
+    "status": "paused",
+    "pubStatus": "ongoing",
+    "review": "A quiet, highly introspective slice-of-life that focuses on the distance between two teenage girls. Adachi's intense inner monologues are highly relatable and endearing.",
+    "tags": [
+      "Slice of Life",
+      "Romance",
+      "School Life",
+      "Slow Burn"
+    ]
+  },
+  {
+    "id": 10,
+    "title": "100 days until CEO and intern have XXX",
+    "cover": "",
+    "status": "finished",
+    "pubStatus": "axed",
+    "tags": [
+      "Romance",
+      "Slice of Life",
+      "Office"
+    ],
+    "review": "",
+    "rating": 2
+  }
+]
