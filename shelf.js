@@ -322,6 +322,7 @@ function getPubBadge(pubStatus) {
   const map = {
     completed: ['Completed', 'pub-completed'],
     ongoing: ['Ongoing', 'pub-ongoing'],
+    hiatus: ['Hiatus', 'pub-hiatus'],
     'scanlation ongoing': ['Scanlation', 'pub-scanlation'],
     axed: ['Axed', 'pub-axed'],
     finished: ['Finished (JP)', 'pub-finished'],

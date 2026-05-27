@@ -35,6 +35,8 @@
   --color-pub-completed-text: #0277BD;
   --color-pub-ongoing-bg: #E8F8F5;
   --color-pub-ongoing-text: #117A65;
+  --color-pub-hiatus-bg: #FFF1E6;
+  --color-pub-hiatus-text: #B5531B;
   --color-pub-scanlation-bg: #EBF5FB;
   --color-pub-scanlation-text: #2980B9;
   --color-pub-axed-bg: #F2F4F4;
@@ -77,6 +79,8 @@
   --color-pub-completed-text: #4FC3F7;
   --color-pub-ongoing-bg: rgba(17, 122, 101, 0.2);
   --color-pub-ongoing-text: #48C9B0;
+  --color-pub-hiatus-bg: rgba(181, 83, 27, 0.22);
+  --color-pub-hiatus-text: #FFB184;
   --color-pub-scanlation-bg: rgba(41, 128, 185, 0.2);
   --color-pub-scanlation-text: #5DADE2;
   --color-pub-axed-bg: rgba(127, 140, 141, 0.2);
@@ -588,6 +592,7 @@ select:focus, input:focus, textarea:focus {
 /* Publication status badges */
 .pub-completed   { background-color: var(--color-pub-completed-bg); color: var(--color-pub-completed-text); }
 .pub-ongoing     { background-color: var(--color-pub-ongoing-bg); color: var(--color-pub-ongoing-text); }
+.pub-hiatus      { background-color: var(--color-pub-hiatus-bg); color: var(--color-pub-hiatus-text); }
 .pub-scanlation  { background-color: var(--color-pub-scanlation-bg); color: var(--color-pub-scanlation-text); }
 .pub-axed        { background-color: var(--color-pub-axed-bg); color: var(--color-pub-axed-text); }
 .pub-finished    { background-color: var(--color-pub-finished-bg); color: var(--color-pub-finished-text); }

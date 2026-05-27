@@ -1,129 +1,227 @@
 [
   {
     "id": 1,
-    "title": "Bloom Into You",
-    "rating": 10,
-    "status": "finished",
-    "pubStatus": "completed",
-    "review": "A masterclass in character development, pacing, and psychological depth. Yuu and Touko's exploration of what love means is beautiful, subtle, and incredibly moving. Nakatani Nio's artwork is clean and expressive. Highly recommended!",
+    "title": "\"I Want to Touch\" is How Love Starts",
+    "alternateTitle": "\"Furetai\" wa Koi no Hajimari",
+    "cover": "https://cdn.myanimelist.net/images/manga/5/323711l.jpg",
+    "author": "Kumoko",
+    "scanlator": "Scienceyscans",
+    "licensor": "",
+    "status": "reading",
+    "pubStatus": "ongoing",
     "tags": [
-      "Romance",
       "Drama",
-      "School Life",
-      "High School"
-    ]
+      "Kuudere",
+      "Romance",
+      "School life",
+      "Yuri"
+    ],
+    "review": "",
+    "rating": 8
   },
   {
     "id": 2,
-    "title": "Whisper Me a Love Song",
-    "rating": 10,
+    "title": "#Gal to Gal no Yuri",
+    "alternateTitle": "#Gyaru to Gyaru no Yuri",
+    "cover": "",
+    "author": "Inoue Koharu",
+    "scanlator": "Scienceyscans",
+    "licensor": "Viz Media",
     "status": "reading",
-    "pubStatus": "ongoing",
-    "review": "Extremely sweet and cozy. Himari and Yori's romance is adorable and features a wonderful music theme. The art is absolutely gorgeous with high contrast paneling and expressive facial details.",
+    "pubStatus": "licensed",
     "tags": [
-      "Romance",
-      "Music",
-      "School Life",
-      "Fluff"
-    ]
+      "Couple life",
+      "Dark skin",
+      "Gyaru",
+      "School life",
+      "Slice of life",
+      "Wholesome"
+    ],
+    "review": "",
+    "rating": 8
   },
   {
     "id": 3,
-    "title": "The Summer You Were There",
-    "rating": 10,
+    "title": "Girlfriend Limited to 7 Days",
+    "alternateTitle": "7-Kakan Gentei Kanojo",
+    "cover": "",
+    "author": "Amazaki Suika",
+    "scanlator": "Oddity Translations, Pavane Scans",
+    "licensor": "",
     "status": "finished",
-    "pubStatus": "finished",
-    "review": "An absolutely heart-wrenching, bittersweet masterpiece. The relationship between Shizuku and Kaori is built on layers of tragedy, writing, and beautiful quiet moments. Keep tissues nearby.",
+    "pubStatus": "completed",
     "tags": [
-      "Drama",
-      "Tragedy",
+      "Comedy",
+      "Gyaru",
+      "Kuudere",
       "Romance",
-      "Emotional"
-    ]
+      "School life"
+    ],
+    "review": "",
+    "rating": 6
   },
   {
     "id": 4,
-    "title": "How Do We Relationship?",
-    "rating": 10,
+    "title": "A Face You Shouldn't Show",
+    "alternateTitle": "Utsushicha Dame na Kao",
+    "cover": "",
+    "author": "Flowerchild",
+    "scanlator": "Suimasen Scans",
+    "licensor": "",
     "status": "reading",
     "pubStatus": "ongoing",
-    "review": "One of the most mature and realistic depictions of a queer relationship in manga history. Miwa and Saeko face actual relationship conflicts, communication barriers, and college social pressures. Deeply relatable.",
     "tags": [
+      "Adult life",
+      "BDSM",
       "Drama",
-      "Romance",
-      "College Life",
-      "Realistic"
-    ]
+      "Height gap",
+      "NSFW"
+    ],
+    "review": "",
+    "rating": 6
   },
   {
     "id": 5,
-    "title": "I'm in Love with the Villainess",
-    "rating": 8,
+    "title": "A Love Yet to Bloom",
+    "alternateTitle": "Koi Yori Aoku",
+    "cover": "",
+    "author": "Fukaumi Kon",
+    "scanlator": "knight heron",
+    "licensor": "Seven Seas Entertainment",
     "status": "reading",
     "pubStatus": "ongoing",
-    "review": "A delightful isekai rom-com that has surprising political and social depth. Rei's devotion to Claire is both funny and deeply sincere. The world building builds up elegantly over time.",
     "tags": [
-      "Isekai",
-      "Fantasy",
-      "Comedy",
-      "Romance"
-    ]
+      "Glasses",
+      "Public transportation",
+      "School girl",
+      "School life",
+      "Slice of life",
+      "Wholesome"
+    ],
+    "review": "",
+    "rating": 8
   },
   {
     "id": 6,
-    "title": "Girl Friends",
-    "rating": 10,
-    "status": "finished",
-    "pubStatus": "completed",
-    "review": "A foundational modern yuri classic. Morinaga Milk's story of Mari and Akiko remains the gold standard for high school romance and self-acceptance. The slow-burn progression is perfect.",
+    "title": "A Monster Wants to Eat Me",
+    "alternateTitle": "Watashi o Tabetai, Hitodenashi/ Watatabe",
+    "cover": "",
+    "author": "Naekawa Sai",
+    "scanlator": "knight heron, Athanasia",
+    "licensor": "Yen Press",
+    "status": "reading",
+    "pubStatus": "ongoing",
     "tags": [
-      "Romance",
-      "School Life",
+      "Anime",
+      "Childhood friends",
       "Drama",
-      "Classic"
-    ]
+      "Mermaid",
+      "Monster girl",
+      "School girl",
+      "Supernatural"
+    ],
+    "review": "",
+    "rating": 8
   },
   {
     "id": 7,
-    "title": "Citrus",
-    "rating": 6,
-    "status": "dropped",
-    "pubStatus": "finished",
-    "review": "Highly dramatic stepsibling romance with stunning artwork, but the early pacing and boundary issues can be quite polarizing. Great fashion and side characters though.",
+    "title": "A Room For Two",
+    "alternateTitle": "Futaribeya",
+    "cover": "",
+    "author": "Yukiko",
+    "scanlator": "knight heron",
+    "licensor": "INKR Comics, TokyoPop",
+    "status": "finished",
+    "pubStatus": "completed",
     "tags": [
-      "Drama",
+      "4-koma",
+      "Adult life",
+      "College",
+      "Comedy",
+      "Couple life",
       "Romance",
-      "School Life",
-      "Melodrama"
-    ]
+      "Roommates",
+      "School life",
+      "Slice of life",
+      "Wholesome"
+    ],
+    "review": "",
+    "rating": 10
   },
   {
     "id": 8,
-    "title": "Otherside Picnic",
-    "rating": 10,
-    "status": "reading",
+    "title": "A Scummy Gap Student With a Hard Life Calls Upon a Lady of the Night",
+    "alternateTitle": "Kuzu Rouninsei, Jinsei ga Tsurai no de Yoru no Onee-san wo Yondemita",
+    "cover": "",
+    "author": "Kosuzume",
+    "scanlator": "/u/ Scanlations",
+    "licensor": "",
+    "status": "paused",
     "pubStatus": "ongoing",
-    "review": "A unique blend of cosmic horror, Japanese internet urban legends, and slow-burn GL romance. Sorawo and Toriko's chemistry in dangerous anomalies is unmatched. Highly atmospheric.",
     "tags": [
-      "Sci-Fi",
-      "Mystery",
-      "Adventure",
-      "Horror",
-      "Slow Burn"
-    ]
+      "Age gap",
+      "College",
+      "Drama",
+      "Pay for gay",
+      "Prostitution"
+    ],
+    "review": "",
+    "rating": 6
   },
   {
     "id": 9,
-    "title": "Adachi and Shimamura",
-    "rating": 8,
-    "status": "paused",
+    "title": "A Story About How She Grew Conscious of Her Childhood Friend",
+    "alternateTitle": "No Mark datte Osananajimi wo Ishiki shi Hajimeru Hanashi",
+    "author": "Hanaame Kau",
+    "scanlator": "Sticky Scans",
+    "licensor": "",
+    "status": "reading",
     "pubStatus": "ongoing",
-    "review": "A quiet, highly introspective slice-of-life that focuses on the distance between two teenage girls. Adachi's intense inner monologues are highly relatable and endearing.",
     "tags": [
-      "Slice of Life",
+      "Childhood friends",
+      "Partial color",
       "Romance",
-      "School Life",
-      "Slow Burn"
-    ]
+      "School life",
+      "Tomboy"
+    ],
+    "review": "",
+    "rating": 6
+  },
+  {
+    "id": 10,
+    "title": "A Yuri Story About How My Classmate Whose Only Good Trait Is Her Excessively Pretty Face Comes At Me Relentlessly",
+    "alternateTitle": "Kao dake yoi Classmate ga Yatara to Guigui Kuru Yuri no Hanashi and Kaodake",
+    "author": "Hachiko, Noshiro Ryou",
+    "scanlator": "Cuetie Scans",
+    "licensor": "",
+    "status": "reading",
+    "pubStatus": "ongoing",
+    "tags": [
+      "Comedy",
+      "Romance",
+      "School life"
+    ],
+    "review": "",
+    "rating": 7
+  },
+  {
+    "id": 11,
+    "title": "A Yuri Manga That Starts With Me Getting Rejected in a Dream",
+    "alternateTitle": "Yume de Furarete Hajimaru Yuri",
+    "author": "Hijiki",
+    "scanlator": "Cuetie Scans",
+    "licensor": "Seven Seas Entertainment",
+    "status": "reading",
+    "pubStatus": "licensed",
+    "tags": [
+      "Blushing",
+      "Childhood friends",
+      "Idiot couple",
+      "Romance",
+      "School life",
+      "Wholesome"
+    ],
+    "review": "",
+    "rating": 9
   }
 ]
