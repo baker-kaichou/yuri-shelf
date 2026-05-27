@@ -6,6 +6,7 @@ A static reading-list site for Yuri / Girls' Love manga and literature.
 
 - `index.html` is the public shelf.
 - `style.css` contains shared/public styling.
+- `shelf.js` contains the public shelf interactions.
 - `manga-data.json` is the portable shelf data file.
 
 ## Local Use
